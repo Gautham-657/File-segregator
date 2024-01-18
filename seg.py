@@ -21,6 +21,7 @@ dest_dir_music = "C:\\Users\\gauth\\Downloads\\Downloaded music"
 dest_dir_video = "C:\\Users\\gauth\\Downloads\\Downloaded Vids"
 dest_dir_image = "C:\\Users\\gauth\\Downloads\\Downlaoded pics"
 dest_dir_documents = "C:\\Users\\gauth\\Downloads\\Downloaded Docs"
+dest_dir_installables="C:\\Users\\gauth\\Downloads\\Installables"
 
 # image types
 image_extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",
@@ -33,6 +34,8 @@ audio_extensions = [".m4a", ".flac", "mp3", ".wav", ".wma", ".aac"]
 # Document types
 document_extensions = [".doc", ".docx", ".odt",
                        ".pdf", ".xls", ".xlsx", ".ppt", ".pptx"]
+
+installable_extensions=[".rar", ".zip", ".exe", ".msi"]
 
 
 def move_file(dest, file_name, name):
@@ -81,6 +84,12 @@ class MoverHandler(FileSystemEventHandler):
         for documents_extension in document_extensions:
             if name.endswith(documents_extension) :
                 move_file(dest_dir_documents, file_name, name)
+                logging.info(f"Moved document file: {name}")
+
+    def check_document_files(self, file_name, name):  # * Checks all Document Files
+        for installable_extension in installable_extensions:
+            if name.endswith(installable_extension) :
+                move_file(dest_dir_installables, file_name, name)
                 logging.info(f"Moved document file: {name}")
 
 
